@@ -1,3 +1,8 @@
 body {
     width: 700px;
 }
+
+ul#hiddenList {
+    list-style-type: none;
+    padding: 0px;
+}
