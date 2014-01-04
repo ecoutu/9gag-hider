@@ -1,6 +1,5 @@
 $(document).ready(function() {
   var hiddenList = JSON.parse(localStorage.getItem("hiddenList"));
-  console.log(hiddenList);
   for (var key in hiddenList) {
     var hiddenItem = hiddenList[key];
     var title = hiddenItem.title.trim() || "Unknown title";

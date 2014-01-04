@@ -13,7 +13,7 @@ var hider = function() {
     $("div.badge-video-container:visible").closest("article").each(function() {
       var title = $(this).find("h2.badge-item-title > a").text().trim();
       var url = $(this).attr("data-entry-url");
-      console.log('Hiding video post <a href="'+url+'">'+title+'</a>');
+      // console.log('Hiding video post <a href="'+url+'">'+title+'</a>');
       port.postMessage({
         title: title,
         type: "video",
@@ -29,7 +29,7 @@ var hider = function() {
     var title = $(this).find("h2.badge-item-title > a").text().trim();
     var url = $(this).attr("data-entry-url");
     if (height > config.maxHeight) {
-      console.log('Hiding image post <a href="'+url+'">'+title+"</a> with height "+height+"px");
+      // console.log('Hiding image post <a href="'+url+'">'+title+"</a> with height "+height+"px");
       port.postMessage({
         height: height,
         title: title,
@@ -41,10 +41,6 @@ var hider = function() {
   });
 }
 
-$(document).ajaxSuccess(function(event, xhr, settings) {
-  console.log(xhr);
-});
-
 $(document).bind("DOMSubtreeModified", function() {
   if (timeout) {
     clearTimeout(timeout);
@@ -54,7 +50,7 @@ $(document).bind("DOMSubtreeModified", function() {
 
 port.onMessage.addListener(function(msg) {
   if (msg.type == "config") {
-    console.log("Received new config.");
+    // console.log("Received new config.");
     config = JSON.parse(msg.config);
   }
 });

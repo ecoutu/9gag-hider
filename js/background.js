@@ -12,7 +12,7 @@ var setBadge = function(hiddenList) {
 
 var incommingHidden = function(msg) {
   var hiddenList = JSON.parse(localStorage.getItem("hiddenList"));
-  console.log(msg);
+  // console.log(msg);
   hiddenList[msg.url] = msg;
   localStorage.setItem("hiddenList", JSON.stringify(hiddenList));
   setBadge(hiddenList);
@@ -46,5 +46,5 @@ chrome.runtime.onConnect.addListener(function(port) {
   }
 });
 
-console.log(localStorage);
+// console.log(localStorage);
 setBadge(JSON.parse(localStorage.getItem("hiddenList")));
