@@ -7,10 +7,10 @@ var port = chrome.runtime.connect({name: "9gag-hider"});
 var timeout = null;
 
 // TODO: If options change, need to possibly reshow/hide new stuff.
-var hider = function() {
+var hider = function () {
   // hide videos
   if (config.hideVideos) {
-    $("div.badge-video-container:visible").closest("article").each(function() {
+    $("div.badge-video-container:visible").closest("article").each(function () {
       var title = $(this).find("h2.badge-item-title > a").text().trim();
       var url = $(this).attr("data-entry-url");
       // console.log('Hiding video post <a href="'+url+'">'+title+'</a>');
@@ -24,7 +24,7 @@ var hider = function() {
   }
 
   // hide long posts (> config.maxHeight)
-  $("article.badge-entry-container:visible").each(function() {
+  $("article.badge-entry-container:visible").each(function () {
     var height = $(this).height();
     var title = $(this).find("h2.badge-item-title > a").text().trim();
     var url = $(this).attr("data-entry-url");
@@ -41,14 +41,14 @@ var hider = function() {
   });
 }
 
-$(document).bind("DOMSubtreeModified", function() {
+$(document).bind("DOMSubtreeModified", function () {
   if (timeout) {
     clearTimeout(timeout);
   }
   timeout = setTimeout(hider, 500);
 });
 
-port.onMessage.addListener(function(msg) {
+port.onMessage.addListener(function (msg) {
   if (msg.type == "config") {
     // console.log("Received new config.");
     config = JSON.parse(msg.config);

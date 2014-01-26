@@ -6,11 +6,11 @@ var config = {
 
 var openPorts = 0;
 
-var setBadge = function(hiddenList) {
+var setBadge = function (hiddenList) {
   chrome.browserAction.setBadgeText({"text": _.size(hiddenList).toString()});
 };
 
-var incommingHidden = function(msg) {
+var incommingHidden = function (msg) {
   var hiddenList = JSON.parse(localStorage.getItem("hiddenList"));
   // console.log(msg);
   hiddenList[msg.url] = msg;
@@ -27,15 +27,15 @@ if (!localStorage.isInitialized) {
   config = localStorage.getItem("config");
 }
 
-chrome.runtime.onConnect.addListener(function(port) {
+chrome.runtime.onConnect.addListener(function (port) {
   if (port.name == "9gag-hider") {
     var configMsg = {
       type: "config",
       config: config
-    }
-    port.onDisconnect.addListener(function() {
+    };
+    port.onDisconnect.addListener(function () {
       openPorts--;
-      if (openPorts == 0) {
+      if (openPorts === 0) {
         localStorage.setItem("hiddenList", JSON.stringify({}));
         setBadge({});
       }
